@@ -27,17 +27,27 @@ Zepto( function($) {
 });
 
 var make_bookmark_api_call = function() {
-  var options = {
-    type: 'POST',
-    url: 'https://api.del.icio.us/v1/posts/add',
-    data: {
-      url: 'http://en.wikipedia.org/wiki/Data,_context_and_interaction',
-      description: 'Data, context and interaction (DCI) is a paradigm'
-    },
-    headers: { 'Authorization' : 'Basic ' + localStorage.getItem('base_64_login_string') }
-  };
+  chrome.tabs.getSelected(null, function(tab) {
+    var options = {
+      type: 'POST',
+      url: 'https://api.del.icio.us/v1/posts/add',
+      data: {
+        url         : tab.url,
+        description : tab.title,
+        shared      : 'no',
+        tags        : $("#tags").val()
+      },
+      headers: { 'Authorization' : 'Basic ' + localStorage.getItem('base_64_login_string') },
+      success: function(data) {
+        console.log(data);
+        window.close();
+      },
+      error: function(xhr, type){
+        alert('Ajax error!')
+      }
+    };
 
-  var xhr = $.ajax(options);
-  console.log(xhr);
+    $.ajax(options);
+  });
 }
 
