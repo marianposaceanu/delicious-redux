@@ -1,8 +1,8 @@
 {
   "name": "Delicious Redux",
-  "version": "0.1",
+  "version": "0.3",
   "manifest_version": 2,
-  "description": "A simpler faster delicious bookmarking extension",
+  "description": "A simpler, faster delicious bookmarking extension",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
@@ -10,5 +10,8 @@
   "permissions": [
     "tabs",
     "https://api.del.icio.us/"
-  ]
+  ],
+  "icons": {
+    "128":"128_delicious.png"
+  }
 }
